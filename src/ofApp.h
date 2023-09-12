@@ -2,7 +2,6 @@
 
 #include "ofMain.h"
 #include "stableDiffusion/stable-diffusion.h"
-#include <thread>
 
 class ofApp : public ofBaseApp{
 	
