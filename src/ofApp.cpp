@@ -2,7 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	// StableDiffusion(std::thread::hardware_concurrency(), false, false, CUDA_RNG);
+	printf("%s", sd_get_system_info().c_str());
 	set_sd_log_level(INFO);
 	stable.load_from_file("data/models/stable-diffusion-nano-2-1-ggml-model-f16.bin");
 	tex.allocate(128, 128, GL_RGB);
