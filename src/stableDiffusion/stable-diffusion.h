@@ -39,7 +39,7 @@ class StableDiffusion {
     std::shared_ptr<StableDiffusionGGML> sd;
 
    public:
-    StableDiffusion(int n_threads = 16,
+    StableDiffusion(int n_threads = 8,
                     bool vae_decode_only = false,
                     bool free_params_immediately = false,
                     RNGType rng_type = CUDA_RNG);
