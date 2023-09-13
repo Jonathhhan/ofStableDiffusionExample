@@ -1,12 +1,11 @@
 #pragma once
 
 #include "ofMain.h"
+#include "stableDiffusionThread.h"
 #include "stableDiffusion/stable-diffusion.h"
 
-class ofApp : public ofBaseApp{
-	
+class ofApp : public ofBaseApp {
 	public:
-		
 		void setup();
 		void update();
 		void draw();
@@ -22,7 +21,8 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);		
-		StableDiffusion stable;
-		ofTexture tex;
+		ofTexture texture;
+		ofPixels pixels;
 		std::string prompt;
+		stableDiffusionThread thread;
 };

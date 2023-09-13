@@ -4,20 +4,27 @@
 void ofApp::setup(){
 	printf("%s", sd_get_system_info().c_str());
 	set_sd_log_level(INFO);
-	stable.load_from_file("data/models/stable-diffusion-nano-2-1-ggml-model-f16.bin");
-	tex.allocate(128, 128, GL_RGB);
-	tex.setTextureMinMagFilter(GL_NEAREST, GL_NEAREST);
+	thread.stableDiffusion.load_from_file("data/models/stable-diffusion-nano-2-1-ggml-model-f16.bin");
+	texture.allocate(128, 128, GL_RGB);
+	texture.setTextureMinMagFilter(GL_NEAREST, GL_NEAREST);
 	prompt = "a lovely cat";
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+	if (thread.diffused == true){
+		texture.loadData(&thread.stableDiffusionPixelVector[0], 128, 128, GL_RGB);
+		ofPixels pixels;
+		texture.readToPixels(pixels);
+		ofSaveImage(pixels, "output/image_of_" + prompt + "_" + ofGetTimestampString("%Y-%m-%d-%H-%M-%S") + ".png");
+		thread.diffused = false;
+	}
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
 	ofSetColor(255);
-	tex.draw(20, 20, 512, 512);
+	texture.draw(20, 20, 512, 512);
 	ofDrawBitmapString("Type something and press enter to generate an image.", 40, 550);
 	ofDrawBitmapString("Prompt: " + prompt, 40, 570);
 }
@@ -25,10 +32,10 @@ void ofApp::draw(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 	if (key == OF_KEY_RETURN) {
-		tex.loadData(&stable.txt2img(prompt, "", 7.0, 128, 128, EULER_A, 8, ofRandom(100000))[0], 128, 128, GL_RGB);
-		ofPixels pix;
-		tex.readToPixels(pix);
-		ofSaveImage(pix, "output/image_of_" + prompt + "_" + ofGetTimestampString("%Y-%m-%d-%H-%M-%S") + ".png");
+		if (!thread.isThreadRunning()){
+			thread.prompt = prompt;
+			thread.startThread();
+		}
 	}
 	else {
 		if (key == 8 && prompt.size() > 0) {
