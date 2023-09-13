@@ -10,7 +10,7 @@ public:
 	std::string prompt;
 	bool diffused;
 	void threadedFunction() {
-		stableDiffusionPixelVector = stableDiffusion.txt2img(prompt, "", 7.0, 128, 128, EULER_A, 16, ofRandom(100000));
+		stableDiffusionPixelVector = stableDiffusion.txt2img(prompt, "", 7.0, 128, 128, EULER_A, 16, -1);
 		diffused = true;
 	}
 };
