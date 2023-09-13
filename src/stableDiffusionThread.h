@@ -5,7 +5,6 @@
 class stableDiffusionThread : public ofThread {
 public:
 	StableDiffusion stableDiffusion;
-	ofTexture tex;
 	std::vector<uint8_t> stableDiffusionPixelVector;
 	std::string prompt;
 	bool diffused;
