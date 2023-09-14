@@ -45,17 +45,12 @@ void ofApp::keyPressed(int key){
 			thread.seed = -1;
 			thread.startThread();
 		}
-	}
-	else {
-		if (key == 8 && prompt.size() > 0) {
-			prompt = prompt.substr(0, prompt.size() - 1);
-		}
-		else if (key == 127) {
-			prompt  = "";
-		}
-		else if (prompt.size() < 50) {
-			prompt.append(1, (char)key);
-		}
+	} else if (key == 8 && prompt.size() > 0){
+		prompt = prompt.substr(0, prompt.size() - 1);
+	} else if (key == 127){
+		prompt  = "";
+	} else if (prompt.size() < 50) {
+		prompt.append(1, (char)key);
 	}
 }
 
