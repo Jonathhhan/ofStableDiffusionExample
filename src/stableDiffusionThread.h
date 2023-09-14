@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ofMain.h"
 #include "stableDiffusion/stable-diffusion.h"
 
 class stableDiffusionThread : public ofThread {
@@ -15,8 +16,6 @@ public:
 	int sampleSteps;
 	int seed;
 	bool diffused;
-	void threadedFunction() {
-		stableDiffusionPixelVector = stableDiffusion.txt2img(prompt, negativePrompt, cfgScale, width, height, sampleMethod, sampleSteps, seed);
-		diffused = true;
-	}
+private:
+	void threadedFunction();
 };
