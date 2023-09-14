@@ -5,7 +5,9 @@ void ofApp::setup(){
 	printf("%s", sd_get_system_info().c_str());
 	set_sd_log_level(INFO);
 	thread.stableDiffusion.load_from_file("data/models/stable-diffusion-nano-2-1-ggml-model-f16.bin");
-	texture.allocate(128, 128, GL_RGB);
+	width = 128;
+	height = 128;
+	texture.allocate(width, height, GL_RGB);
 	texture.setTextureMinMagFilter(GL_NEAREST, GL_NEAREST);
 	prompt = "a lovely cat";
 }
@@ -13,7 +15,7 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
 	if (thread.diffused){
-		texture.loadData(&thread.stableDiffusionPixelVector[0], 128, 128, GL_RGB);
+		texture.loadData(&thread.stableDiffusionPixelVector[0], width, height, GL_RGB);
 		ofPixels pixels;
 		texture.readToPixels(pixels);
 		ofSaveImage(pixels, "output/image_of_" + thread.prompt + "_" + ofGetTimestampString("%Y-%m-%d-%H-%M-%S") + ".png");
@@ -34,6 +36,13 @@ void ofApp::keyPressed(int key){
 	if (key == OF_KEY_RETURN) {
 		if (!thread.isThreadRunning()){
 			thread.prompt = prompt;
+			thread.negativePrompt = "";
+			thread.cfgScale = 7.0;
+			thread.width = width;
+			thread.height = height;
+			thread.sampleMethod = EULER_A;
+			thread.sampleSteps = 8;
+			thread.seed = -1;
 			thread.startThread();
 		}
 	}

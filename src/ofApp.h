@@ -24,5 +24,7 @@ class ofApp : public ofBaseApp {
 		ofTexture texture;
 		ofPixels pixels;
 		std::string prompt;
+		int width;
+		int height;
 		stableDiffusionThread thread;
 };
