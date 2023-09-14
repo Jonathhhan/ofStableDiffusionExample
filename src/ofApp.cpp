@@ -16,7 +16,7 @@ void ofApp::update(){
 		texture.loadData(&thread.stableDiffusionPixelVector[0], 128, 128, GL_RGB);
 		ofPixels pixels;
 		texture.readToPixels(pixels);
-		ofSaveImage(pixels, "output/image_of_" + prompt + "_" + ofGetTimestampString("%Y-%m-%d-%H-%M-%S") + ".png");
+		ofSaveImage(pixels, "output/image_of_" + thread.prompt + "_" + ofGetTimestampString("%Y-%m-%d-%H-%M-%S") + ".png");
 		thread.diffused = false;
 	}
 }
