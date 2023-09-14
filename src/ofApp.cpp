@@ -12,7 +12,7 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	if (thread.diffused == true){
+	if (thread.diffused){
 		texture.loadData(&thread.stableDiffusionPixelVector[0], 128, 128, GL_RGB);
 		ofPixels pixels;
 		texture.readToPixels(pixels);
