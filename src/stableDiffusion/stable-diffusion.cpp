@@ -35,8 +35,8 @@ static SDLogLevel log_level = SDLogLevel::INFO;
         } else if (level == SDLogLevel::WARN) {                                                       \
             fprintf(stderr, "[WARN]  %s:%-4d - " format "\n", __FILENAME__, __LINE__, ##__VA_ARGS__); \
             fflush(stdout);                                                                           \
-        } else if (level == SDLogLevel::ERROR) {                                                      \
-            fprintf(stderr, "[SD_ERROR] %s:%-4d - " format "\n", __FILENAME__, __LINE__, ##__VA_ARGS__); \
+        } else if (level == SDLogLevel::SD_ERROR) {                                                      \
+            fprintf(stderr, "[ERROR] %s:%-4d - " format "\n", __FILENAME__, __LINE__, ##__VA_ARGS__); \
             fflush(stdout);                                                                           \
         }                                                                                             \
     } while (0)
