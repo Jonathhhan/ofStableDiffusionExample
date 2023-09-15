@@ -8,7 +8,7 @@ enum SDLogLevel {
     DEBUG,
     INFO,
     WARN,
-    ERROR
+    SD_ERROR
 };
 
 enum RNGType {
