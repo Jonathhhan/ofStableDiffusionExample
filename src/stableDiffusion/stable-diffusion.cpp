@@ -35,7 +35,7 @@ static SDLogLevel log_level = SDLogLevel::INFO;
         } else if (level == SDLogLevel::WARN) {                                                       \
             fprintf(stderr, "[WARN]  %s:%-4d - " format "\n", __FILENAME__, __LINE__, ##__VA_ARGS__); \
             fflush(stdout);                                                                           \
-        } else if (level == SDLogLevel::ERROR) {                                                      \
+        } else if (level == SDLogLevel::SD_ERROR) {                                                      \
             fprintf(stderr, "[ERROR] %s:%-4d - " format "\n", __FILENAME__, __LINE__, ##__VA_ARGS__); \
             fflush(stdout);                                                                           \
         }                                                                                             \
@@ -44,7 +44,7 @@ static SDLogLevel log_level = SDLogLevel::INFO;
 #define LOG_DEBUG(format, ...) SD_LOG(SDLogLevel::DEBUG, format, ##__VA_ARGS__)
 #define LOG_INFO(format, ...) SD_LOG(SDLogLevel::INFO, format, ##__VA_ARGS__)
 #define LOG_WARN(format, ...) SD_LOG(SDLogLevel::WARN, format, ##__VA_ARGS__)
-#define LOG_ERROR(format, ...) SD_LOG(SDLogLevel::ERROR, format, ##__VA_ARGS__)
+#define LOG_ERROR(format, ...) SD_LOG(SDLogLevel::SD_ERROR, format, ##__VA_ARGS__)
 
 #define GGML_FILE_MAGIC 0x67676d6c
 
