@@ -7,10 +7,10 @@ void ofApp::setup() {
 	thread.stableDiffusion.load_from_file("data/models/stable-diffusion-nano-2-1-ggml-model-f16.bin");
 	width = 128;
 	height = 128;
-	fbo.allocate(width, height, GL_RGB);
 	texture.allocate(width, height, GL_RGB);
 	texture.setTextureMinMagFilter(GL_NEAREST, GL_NEAREST);
 	image.load("cat.png");
+	fbo.allocate(width, height, GL_RGB);
 	fbo.begin();
 	image.draw(0,0, width, height);
 	fbo.end();
