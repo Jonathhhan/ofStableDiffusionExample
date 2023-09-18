@@ -4,12 +4,13 @@
 void ofApp::setup() {
 	printf("%s", sd_get_system_info().c_str());
 	set_sd_log_level(INFO);
-	thread.stableDiffusion.load_from_file("data/models/stable-diffusion-nano-2-1-ggml-model-f16.bin");
-	width = 128;
-	height = 128;
+	thread.stableDiffusion.load_from_file("data/models/v2-1_512-ema-pruned-ggml-model-f16.bin");
+	width = 512;
+	height = 512;
 	texture.allocate(width, height, GL_RGB);
 	texture.setTextureMinMagFilter(GL_NEAREST, GL_NEAREST);
-	prompt = "a lovely cat";
+	image.load("wald_512.jpg");
+	prompt = "a lake with trees";
 }
 
 //--------------------------------------------------------------
@@ -34,13 +35,17 @@ void ofApp::draw() {
 void ofApp::keyPressed(int key) {
 	if (key == OF_KEY_RETURN) {
 		if (!thread.isThreadRunning()) {
+			uint8_t* uint8Array = (uint8_t*)image.getPixels().getData();
+			std::vector<uint8_t> unit8Vector(&uint8Array[0], &uint8Array[(int)(image.getWidth() * image.getHeight() * 3)]);
+			thread.pixels = unit8Vector;
 			thread.prompt = prompt;
 			thread.negativePrompt = "";
 			thread.cfgScale = 7.0;
 			thread.width = width;
 			thread.height = height;
 			thread.sampleMethod = EULER_A;
-			thread.sampleSteps = 8;
+			thread.sampleSteps = 30;
+			thread.strength = 0.4;
 			thread.seed = -1;
 			thread.startThread();
 		}

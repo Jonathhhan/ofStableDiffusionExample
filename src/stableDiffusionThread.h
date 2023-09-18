@@ -6,6 +6,7 @@
 class stableDiffusionThread : public ofThread {
 public:
 	StableDiffusion stableDiffusion;
+	std::vector<uint8_t>  pixels;
 	std::vector<uint8_t> stableDiffusionPixelVector;
 	std::string prompt;
 	std::string negativePrompt;
@@ -14,6 +15,7 @@ public:
 	int height;
 	SampleMethod sampleMethod;
 	int sampleSteps;
+	float strength;
 	int seed;
 	bool diffused;
 private:

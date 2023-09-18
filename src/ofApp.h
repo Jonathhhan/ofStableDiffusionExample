@@ -23,6 +23,7 @@ class ofApp : public ofBaseApp {
 		void gotMessage(ofMessage msg);
 
 		stableDiffusionThread thread;
+		ofImage image;
 		ofTexture texture;
 		ofPixels pixels;
 		std::string prompt;
