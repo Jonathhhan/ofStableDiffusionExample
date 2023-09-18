@@ -26,6 +26,7 @@ class ofApp : public ofBaseApp {
 		ofImage image;
 		ofTexture texture;
 		ofPixels pixels;
+		ofFbo fbo;
 		std::string prompt;
 		int width;
 		int height;

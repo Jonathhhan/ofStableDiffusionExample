@@ -4,13 +4,17 @@
 void ofApp::setup() {
 	printf("%s", sd_get_system_info().c_str());
 	set_sd_log_level(INFO);
-	thread.stableDiffusion.load_from_file("data/models/v2-1_512-ema-pruned-ggml-model-f16.bin");
-	width = 512;
-	height = 512;
+	thread.stableDiffusion.load_from_file("data/models/stable-diffusion-nano-2-1-ggml-model-f16.bin");
+	width = 128;
+	height = 128;
+	fbo.allocate(width, height, GL_RGB);
 	texture.allocate(width, height, GL_RGB);
 	texture.setTextureMinMagFilter(GL_NEAREST, GL_NEAREST);
-	image.load("wald_512.jpg");
-	prompt = "a lake with trees";
+	image.load("cat.png");
+	fbo.begin();
+	image.draw(0,0, width, height);
+	fbo.end();
+	prompt = "a cat with blue eyes";
 }
 
 //--------------------------------------------------------------
@@ -35,8 +39,9 @@ void ofApp::draw() {
 void ofApp::keyPressed(int key) {
 	if (key == OF_KEY_RETURN) {
 		if (!thread.isThreadRunning()) {
-			uint8_t* uint8Array = (uint8_t*)image.getPixels().getData();
-			std::vector<uint8_t> uint8Vector(&uint8Array[0], &uint8Array[(int)(image.getWidth() * image.getHeight() * 3)]);
+			fbo.getTexture().readToPixels(pixels);
+			uint8_t* uint8Array = (uint8_t*)pixels.getData();
+			std::vector<uint8_t> uint8Vector(&uint8Array[0], &uint8Array[(int)(width * height * 3)]);
 			thread.pixels = uint8Vector;
 			thread.prompt = prompt;
 			thread.negativePrompt = "";
@@ -44,7 +49,7 @@ void ofApp::keyPressed(int key) {
 			thread.width = width;
 			thread.height = height;
 			thread.sampleMethod = EULER_A;
-			thread.sampleSteps = 20;
+			thread.sampleSteps = 10;
 			thread.strength = 0.9;
 			thread.seed = -1;
 			thread.startThread();
