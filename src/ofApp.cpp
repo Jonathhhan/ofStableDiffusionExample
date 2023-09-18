@@ -44,7 +44,7 @@ void ofApp::keyPressed(int key) {
 			thread.width = width;
 			thread.height = height;
 			thread.sampleMethod = EULER_A;
-			thread.sampleSteps = 30;
+			thread.sampleSteps = 8;
 			thread.strength = 0.4;
 			thread.seed = -1;
 			thread.startThread();
