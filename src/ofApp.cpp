@@ -14,7 +14,7 @@ void ofApp::setup() {
 	fbo.begin();
 	image.draw(0,0, width, height);
 	fbo.end();
-	prompt = "a cat with blue eyes";
+	prompt = "a cat with red eyes";
 }
 
 //--------------------------------------------------------------
