@@ -36,8 +36,8 @@ void ofApp::keyPressed(int key) {
 	if (key == OF_KEY_RETURN) {
 		if (!thread.isThreadRunning()) {
 			uint8_t* uint8Array = (uint8_t*)image.getPixels().getData();
-			std::vector<uint8_t> unit8Vector(&uint8Array[0], &uint8Array[(int)(image.getWidth() * image.getHeight() * 3)]);
-			thread.pixels = unit8Vector;
+			std::vector<uint8_t> uint8Vector(&uint8Array[0], &uint8Array[(int)(image.getWidth() * image.getHeight() * 3)]);
+			thread.pixels = uint8Vector;
 			thread.prompt = prompt;
 			thread.negativePrompt = "";
 			thread.cfgScale = 7.0;
