@@ -41,7 +41,7 @@ void ofApp::keyPressed(int key) {
 		if (!thread.isThreadRunning()) {
 			fbo.getTexture().readToPixels(pixels);
 			uint8_t* uint8Array = (uint8_t*)pixels.getData();
-			std::vector<uint8_t> uint8Vector(&uint8Array[0], &uint8Array[(int)(width * height * 3)]);
+			std::vector<uint8_t> uint8Vector(&uint8Array[0], &uint8Array[width * height * 3]);
 			thread.pixels = uint8Vector;
 			thread.prompt = prompt;
 			thread.negativePrompt = "";
