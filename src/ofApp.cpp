@@ -4,7 +4,7 @@
 void ofApp::setup() {
 	printf("%s", sd_get_system_info().c_str());
 	set_sd_log_level(INFO);
-	thread.stableDiffusion.load_from_file("data/models/stable-diffusion-nano-2-1-ggml-model-f16.bin");
+	thread.stableDiffusion.load_from_file("data/models/stable-diffusion-nano-2-1-ggml-model-f32.bin");
 	width = 128;
 	height = 128;
 	texture.allocate(width, height, GL_RGB);
